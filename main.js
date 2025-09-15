@@ -82,7 +82,7 @@ function createWindow() {
         // 3. Tentukan jalur lengkap file CSV di dalam folder timesheets
         const csvFilePath = path.join(timesheetsDir, filename);
 
-        const header = 'Date,Nama,Project,Task,Sub Task,Location,Quantity,Aktivity\n';
+        const header = 'Date,Nama,Project,Task,Sub Task,Location,Quantity,Description\n';
 
         const [nama, project, task, location, activity] = data;
         const date = today.toLocaleDateString('en-US'); // Format MM/DD/YYYY
