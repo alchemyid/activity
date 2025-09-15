@@ -1,6 +1,17 @@
 **Daily Activity Logger**
 
 This desktop application helps you automatically log your daily work activities. The app will pop up on your screen at a set time interval, prompt you to fill in your work details, and save the data to a CSV file.
+
+**Reporting Location**
+
+Output CSV file will be saved in the same directory $HOME/timesheets/
+
+**Sample Config & App**
+
+![config location](images/config.png) 
+
+![app screenshot](images/app.png)
+
 ***Key Features***
 
 + Automatic Pop-up: The application appears as a full-screen, on-top pop-up at a configurable interval.

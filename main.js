@@ -36,6 +36,13 @@ function createWindow() {
         startScheduler();
     });
 
+    // Tambahkan kode ini untuk memulai aplikasi saat login
+    app.setLoginItemSettings({
+        openAtLogin: true,
+        path: process.execPath,
+        args: ['--processStart', `"${path.basename(process.execPath)}"`]
+    });
+
     // Listener dari renderer process untuk menutup jendela
     ipcMain.on('close-window', () => {
         mainWindow.hide();
@@ -64,8 +71,16 @@ function createWindow() {
         const monthName = getIndonesianMonthName(today);
         const filename = `${monthName}-timesheets.csv`;
 
-        // Ubah lokasi penyimpanan ke direktori root aplikasi
-        const csvFilePath = path.join(__dirname, filename);
+        // 1. Tentukan jalur ke folder timesheets di direktori home pengguna
+        const timesheetsDir = path.join(app.getPath('home'), 'timesheets');
+
+        // 2. Buat direktori jika belum ada
+        if (!fs.existsSync(timesheetsDir)) {
+            fs.mkdirSync(timesheetsDir);
+        }
+
+        // 3. Tentukan jalur lengkap file CSV di dalam folder timesheets
+        const csvFilePath = path.join(timesheetsDir, filename);
 
         const header = 'Date,Nama,Project,Task,Sub Task,Location,Quantity,Aktivitas\n';
 
