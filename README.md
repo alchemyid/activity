@@ -1,18 +1,12 @@
 **Daily Activity Logger**
 
 This desktop application helps you automatically log your daily work activities. The app will pop up on your screen at a set time interval, prompt you to fill in your work details, and save the data to a CSV file.
-
-in directory dist already compiled version for Windows, Linux, for macos you need to compile it yourself on macOS machine.
-
 ***Key Features***
 
-    Automatic Pop-up: The application appears as a full-screen, on-top pop-up at a configurable interval.
-
-    Always On Top: The application window takes over the screen, ensuring you can immediately log your activity without any distractions.
-
-    Easy Configuration: All essential settings like your name, projects, tasks, and locations are stored in a single config.json file.
-
-    CSV Data Storage: Activities are automatically saved to a CSV file with a specific name format (month-timesheets.csv).
++ Automatic Pop-up: The application appears as a full-screen, on-top pop-up at a configurable interval.
++ Always On Top: The application window takes over the screen, ensuring you can immediately log your activity without any distractions.
++ Easy Configuration: All essential settings like your name, projects, tasks, and locations are stored in a single config.json file.
++ CSV Data Storage: Activities are automatically saved to a CSV file with a specific name format (month-timesheets.csv).
 
 ***How to Run the Application***
 
@@ -25,16 +19,16 @@ This app is built with Electron, so it requires Node.js and npm to run.
 3. Navigate to your project directory.
 4. Run the following command to install all the necessary dependencies:
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
 ***Running in Development Mode***
 
 To run the application in development mode:
-    ```bash
-    npm start
-    ```
+```bash
+npm start
+```
 
 ***Project Structure***
 
@@ -79,22 +73,12 @@ This file is crucial as it contains all the data and settings you can adjust.
 
 To create a distributable binary that doesn't require Node.js, you can use electron-builder.
 
-***Compiling for Windows & Linux***
+***Compiling for Windows, MacOS & Linux***
 
 Run the following command in your terminal:
-    ```bash 
-    npm run dist
-    ```
+```bash 
+npm run dist
+```
 This command will create an installable file (.exe for Windows and .AppImage for Linux) inside the dist/ folder.
 
-***Compiling for macOS***
-
-Important: To create a binary that will run on macOS, you must run the compilation command on a macOS machine.
-
-This is because electron-builder requires specific tools and dependencies that are only available in a macOS environment to create a valid .dmg file. Attempting to build a macOS file from another operating system (like Linux) will result in a Cannot find module 'dmg-license' error because this macOS-specific dependency cannot be installed there.
-
-So, if you need a macOS installer, make sure you are on a Mac when you run the command:
-    ```bash
-    npm run dist
-    ```
-After compilation is complete, the Daily-Activity-Logger-*.dmg file will be available inside the dist/ folder.
+ is complete, the Daily-Activity-Logger-*.dmg file will be available inside the dist/ folder.
