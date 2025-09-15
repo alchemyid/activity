@@ -26,7 +26,7 @@ npm install
 ***Running in Development Mode***
 
 To run the application in development mode:
-```bash
+```basht
 npm start
 ```
 
