@@ -53,25 +53,34 @@ npm start
 This file is crucial as it contains all the data and settings you can adjust.
 ```json 
 {
-    "user": {
+  "user": {
     "name": "Giri Rahayu"
-},
-"scheduler": {
+  },
+  "scheduler": {
     "interval_minutes": 30
-},
-"project_list": [
+  },
+  "project_list": [
     {
-        "name": "A.I. Wide Area Digital (WAD) Trunking Project - Fase 1 IDG",
-        "tasks": [
-            "Team Lead Middleware",
-            "System Integration"
-        ]
+      "name": "A.I. Wide Area Digital (WAD) Trunking Project - Fase 1 IDG",
+      "tasks": [
+        "Team Lead Middleware",
+        "Integrasi Sistem",
+        "Pengujian Aplikasi"
+      ]
+    },
+    {
+      "name": "Mobile App Development",
+      "tasks": [
+        "Desain UI/UX",
+        "Pengembangan Frontend",
+        "Pengembangan Backend"
+      ]
     }
-],
-"locations": [
+  ],
+  "locations": [
     "Indy Bintaro Office - Building F",
     "Remote Location"
-]
+  ]
 }
 ```
 + make sure this config.json file is in the same directory as binnary file.
