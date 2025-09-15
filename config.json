@@ -1,0 +1,30 @@
+{
+  "user": {
+    "name": "Giri Rahayu"
+  },
+  "scheduler": {
+    "interval_minutes": 1
+  },
+  "project_list": [
+    {
+      "name": "A.I. Wide Area Digital (WAD) Trunking Project - Fase 1 IDG",
+      "tasks": [
+        "Team Lead Middleware",
+        "Integrasi Sistem",
+        "Pengujian Aplikasi"
+      ]
+    },
+    {
+      "name": "Mobile App Development",
+      "tasks": [
+        "Desain UI/UX",
+        "Pengembangan Frontend",
+        "Pengembangan Backend"
+      ]
+    }
+  ],
+  "locations": [
+    "Indy Bintaro Office - Building F",
+    "Remote Location"
+  ]
+}

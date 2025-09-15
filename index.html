@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catat Aktivitas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        h2 { color: #333; }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        textarea { resize: vertical; height: 120px; }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>What The Hell Are You Doing ?</h2>
+    <div class="form-group">
+        <label for="project-select">Project</label>
+        <select id="project-select"></select>
+    </div>
+    <div class="form-group">
+        <label for="task-select">Task</label>
+        <select id="task-select"></select>
+    </div>
+    <div class="form-group">
+        <label for="location-select">Location</label>
+        <select id="location-select"></select>
+    </div>
+    <div class="form-group">
+        <label for="activity-input">Aktivitas</label>
+        <textarea id="activity-input" placeholder="Tuliskan aktivitas Anda secara detail."></textarea>
+    </div>
+    <button onclick="saveAndHide()">Save & Hide</button>
+</div>
+
+<script src="renderer.js"></script>
+</body>
+</html>

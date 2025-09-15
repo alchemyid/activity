@@ -1,0 +1,13 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.girirahayu.activity
+productName: Timesheets
+win:
+  target: nsis
+mac:
+  target: dmg
+linux:
+  target: AppImage
+files: []
+electronVersion: 28.3.3

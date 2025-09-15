@@ -1,0 +1,29 @@
+{
+  "name": "activity",
+  "version": "1.0.0",
+  "description": "Aplikasi pencatat aktivitas harian yang selalu on top.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --mac --linux"
+  },
+  "build": {
+    "appId": "com.girirahayu.activity",
+    "productName": "Timesheets",
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1"
+  }
+}
