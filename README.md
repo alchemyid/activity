@@ -63,7 +63,7 @@ This file is crucial as it contains all the data and settings you can adjust.
 ]
 }
 ```
-
++ make sure this config.json file is in the same directory as binnary file.
 + user: This object holds your name. It will be automatically included in every row of the CSV file.
 + scheduler: This object contains interval_minutes, which determines how often the pop-up will appear. You can change the value of 30 to any other duration (e.g., 60 for one hour).
 + project_list: This is an array of your projects. Each project has a name and an array of tasks that will appear in the pop-up's dropdown menu.
