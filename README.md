@@ -2,9 +2,10 @@
 
 This desktop application helps you automatically log your daily work activities. The app will pop up on your screen at a set time interval, prompt you to fill in your work details, and save the data to a CSV file.
 
-**Reporting Location**
+**Reporting & Configuration file Location**
 
-Output CSV file will be saved in the same directory $HOME/timesheets/
+Default Configuration file ( config.json ) and Output CSV file will be saved in the same directory $HOME/timesheets/
+after running for first time please adjust config.json
 
 **Sample Config & App**
 

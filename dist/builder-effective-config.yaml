@@ -10,4 +10,4 @@ mac:
 linux:
   target: AppImage
 files: []
-electronVersion: 28.3.3
+electronVersion: 38.1.0
