@@ -98,6 +98,7 @@ Run the following command in your terminal:
 ```bash 
 npm run dist
 ```
-This command will create an installable file (.exe for Windows and .AppImage for Linux) inside the dist/ folder.
+This command will create an installable file (.exe for Windows and .AppImage for Linux dmg for macOs) inside the dist/ folder.
 
  is complete, the Daily-Activity-Logger-*.dmg file will be available inside the dist/ folder.
+ for macOS make sure you allow application to running in login item in general system seeting
