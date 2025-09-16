@@ -7,9 +7,7 @@ This desktop application helps you automatically log your daily work activities.
 Default Configuration file ( config.json ) and Output CSV file will be saved in the same directory $HOME/timesheets/
 after running for first time please adjust config.json
 
-**Sample Config & App**
-
-![config location](images/config.png) 
+**Sample UI App**
 
 ![app screenshot](images/app.png)
 
