@@ -40,17 +40,15 @@ function createWindow() {
     },
     frame: false, // Jendela tanpa border
     alwaysOnTop: true, // Pastikan jendela selalu di atas
-    show: false, // Sembunyikan jendela saat pertama kali dibuat
+    show: true, // Ubah menjadi TRUE agar jendela langsung muncul
     resizable: false, // Jendela tidak dapat diubah ukurannya
-    // Hapus properti 'fullscreen: true' yang menyebabkan masalah di macOS
   });
 
   mainWindow.loadFile('index.html');
-
-  mainWindow.once('ready-to-show', () => {
-    startScheduler();
-  });
   
+  // Panggil startScheduler() langsung setelah jendela dibuat
+  startScheduler();
+
   app.setLoginItemSettings({
     openAtLogin: true,
     path: process.execPath,
@@ -120,7 +118,7 @@ function startScheduler() {
   const intervalInMinutes = config.scheduler.interval_minutes || 30;
   const intervalInMilliseconds = intervalInMinutes * 60 * 1000;
   timerId = setInterval(() => {
-    if (!mainWindow.isVisible()) {
+    if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.isVisible()) {
       // Gunakan show() untuk menampilkan kembali jendela
       mainWindow.show();
       // Tambahkan fokus agar jendela muncul di atas semua aplikasi
@@ -144,8 +142,9 @@ app.whenReady().then(() => {
   });
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+// HAPUS BLOK KODE INI
+// app.on('window-all-closed', () => {
+//   if (process.platform !== 'darwin') {
+//     app.quit();
+//   }
+// });
