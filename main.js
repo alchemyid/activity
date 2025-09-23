@@ -30,7 +30,6 @@ function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
   mainWindow = new BrowserWindow({
-    // Gunakan width dan height layar untuk ukuran jendela
     width,
     height,
     webPreferences: {
@@ -38,25 +37,24 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
-    frame: false, // Jendela tanpa border
-    alwaysOnTop: true, // Pastikan jendela selalu di atas
-    show: true, // Ubah menjadi TRUE agar jendela langsung muncul
-    resizable: false, // Jendela tidak dapat diubah ukurannya
+    frame: false,
+    alwaysOnTop: true,
+    show: false, // Jendela tidak akan muncul secara default
+    resizable: false,
   });
 
   mainWindow.loadFile('index.html');
-  
-  // Panggil startScheduler() langsung setelah jendela dibuat
-  startScheduler();
-
+  // Tampilkan dan fokuskan jendela saat pertama kali dijalankan
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
+  // Pengaturan autostart, cukup openAtLogin: true untuk macOS
   app.setLoginItemSettings({
-    openAtLogin: true,
-    path: process.execPath,
-    args: ['--processStart', `"${path.basename(process.execPath)}"`]
+    openAtLogin: true
   });
 
   ipcMain.on('close-window', () => {
-    // Sembunyikan jendela saat tombol 'Tutup' diklik
     mainWindow.hide();
   });
 
@@ -76,10 +74,11 @@ function createWindow() {
   }
 
   ipcMain.on('save-activity', (event, data) => {
-    // Segera sembunyikan atau minimize jendela setelah tombol Simpan ditekan
     if (process.platform === 'darwin') {
+      // Minimize ke Dock di macOS
       mainWindow.minimize();
     } else {
+      // Sembunyikan jendela di platform lain
       mainWindow.hide();
     }
 
@@ -117,11 +116,10 @@ function startScheduler() {
   clearInterval(timerId);
   const intervalInMinutes = config.scheduler.interval_minutes || 30;
   const intervalInMilliseconds = intervalInMinutes * 60 * 1000;
+  
   timerId = setInterval(() => {
-    if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.isVisible()) {
-      // Gunakan show() untuk menampilkan kembali jendela
+    if (mainWindow && !mainWindow.isDestroyed()) {
       mainWindow.show();
-      // Tambahkan fokus agar jendela muncul di atas semua aplikasi
       mainWindow.focus();
     }
   }, intervalInMilliseconds);
@@ -134,17 +132,22 @@ ipcMain.handle('get-config', () => {
 app.whenReady().then(() => {
   loadConfig();
   createWindow();
-
+  startScheduler(); // Mulai scheduler segera setelah app siap
+  
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
+    // Di macOS, aplikasi tetap berjalan di dock meski semua jendela ditutup
+    if (mainWindow) {
+      if (!mainWindow.isVisible()) {
+        mainWindow.show();
+      }
+      mainWindow.focus();
+    } else {
       createWindow();
     }
   });
 });
 
-// HAPUS BLOK KODE INI
-// app.on('window-all-closed', () => {
-//   if (process.platform !== 'darwin') {
-//     app.quit();
-//   }
-// });
+app.on('window-all-closed', () => {
+  // Biarkan proses tetap berjalan di latar belakang
+  // Jangan panggil app.quit()
+});
