@@ -7,6 +7,7 @@ const fs = require('fs');
 let mainWindow;
 let timerId;
 let config;
+let configWatcher;
 
 // Fungsi untuk memuat konfigurasi dari lokasi yang benar
 function loadConfig() {
@@ -24,6 +25,16 @@ function loadConfig() {
     config = JSON.parse(fs.readFileSync(defaultConfigPath, 'utf-8'));
     fs.writeFileSync(userConfigPath, JSON.stringify(config, null, 2));
   }
+
+  // Watch config file for changes, restart app if config changes
+  if (configWatcher) configWatcher.close();
+  configWatcher = fs.watch(userConfigPath, (eventType) => {
+    if (eventType === 'change') {
+      // Restart the app to reload config
+      app.relaunch();
+      app.exit(0);
+    }
+  });
 }
 
 function createWindow() {
@@ -134,17 +145,8 @@ app.whenReady().then(() => {
   createWindow();
   startScheduler(); // Mulai scheduler segera setelah app siap
   
-  app.on('activate', () => {
-    // Di macOS, aplikasi tetap berjalan di dock meski semua jendela ditutup
-    if (mainWindow) {
-      if (!mainWindow.isVisible()) {
-        mainWindow.show();
-      }
-      mainWindow.focus();
-    } else {
-      createWindow();
-    }
-  });
+  // Jangan munculkan jendela pada event activate, biarkan hanya scheduler yang memunculkan
+  // app.on('activate', () => {});
 });
 
 app.on('window-all-closed', () => {
