@@ -1,5 +1,3 @@
-// main.js
-
 const { app, BrowserWindow, ipcMain, dialog, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
@@ -37,19 +35,19 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
+    icon: path.join(__dirname, 'assets', 'icon.png'), // <- update custom icon di sini
     frame: false,
     alwaysOnTop: true,
-    show: false, // Jendela tidak akan muncul secara default
+    show: false,
     resizable: false,
   });
 
   mainWindow.loadFile('index.html');
-  // Tampilkan dan fokuskan jendela saat pertama kali dijalankan
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
     mainWindow.focus();
   });
-  // Pengaturan autostart, cukup openAtLogin: true untuk macOS
+
   app.setLoginItemSettings({
     openAtLogin: true
   });
@@ -58,7 +56,6 @@ function createWindow() {
     mainWindow.hide();
   });
 
-  // Tetap gunakan formatDuration jika dibutuhkan di tempat lain
   function formatDuration(minutes) {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
@@ -66,7 +63,6 @@ function createWindow() {
     return `${pad(hours)}:${pad(remainingMinutes)}`;
   }
 
-  // Function untuk menghitung Quantity sesuai rule yang baru
   function formatQuantity(minutes) {
     if (minutes < 60) {
       return (60 / minutes).toString();
@@ -85,10 +81,8 @@ function createWindow() {
 
   ipcMain.on('save-activity', (event, data) => {
     if (process.platform === 'darwin') {
-      // Minimize ke Dock di macOS
       mainWindow.minimize();
     } else {
-      // Sembunyikan jendela di platform lain
       mainWindow.hide();
     }
 
@@ -103,7 +97,7 @@ function createWindow() {
     const [nama, project, task, location, activity] = data;
     const date = today.toLocaleDateString('en-US'); 
     const intervalInMinutes = config.scheduler.interval_minutes || 30;
-    const quantity = formatQuantity(intervalInMinutes);
+    const quantity = formatQuantity(intervalInMinutes); // sudah aturan baru
     
     const row = `"${date}","${nama}","${project}","${task}","","${location}","${quantity}","${activity.replace(/"/g, '""')}"\n`;
 
@@ -142,10 +136,9 @@ ipcMain.handle('get-config', () => {
 app.whenReady().then(() => {
   loadConfig();
   createWindow();
-  startScheduler(); // Mulai scheduler segera setelah app siap
+  startScheduler();
   
   app.on('activate', () => {
-    // Di macOS, aplikasi tetap berjalan di dock meski semua jendela ditutup
     if (mainWindow) {
       if (!mainWindow.isVisible()) {
         mainWindow.show();
