@@ -56,13 +56,6 @@ function createWindow() {
     mainWindow.hide();
   });
 
-  function formatDuration(minutes) {
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-    const pad = (num) => String(num).padStart(2, '0');
-    return `${pad(hours)}:${pad(remainingMinutes)}`;
-  }
-
   function formatQuantity(minutes) {
     return (minutes / 60).toString();
   }
