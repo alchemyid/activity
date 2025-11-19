@@ -58,11 +58,21 @@ function createWindow() {
     mainWindow.hide();
   });
 
+  // Tetap gunakan formatDuration jika dibutuhkan di tempat lain
   function formatDuration(minutes) {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     const pad = (num) => String(num).padStart(2, '0');
     return `${pad(hours)}:${pad(remainingMinutes)}`;
+  }
+
+  // Function untuk menghitung Quantity sesuai rule yang baru
+  function formatQuantity(minutes) {
+    if (minutes < 60) {
+      return (60 / minutes).toString();
+    } else {
+      return (minutes / 60).toString();
+    }
   }
 
   function getIndonesianMonthName(date) {
@@ -93,7 +103,7 @@ function createWindow() {
     const [nama, project, task, location, activity] = data;
     const date = today.toLocaleDateString('en-US'); 
     const intervalInMinutes = config.scheduler.interval_minutes || 30;
-    const quantity = formatDuration(intervalInMinutes);
+    const quantity = formatQuantity(intervalInMinutes);
     
     const row = `"${date}","${nama}","${project}","${task}","","${location}","${quantity}","${activity.replace(/"/g, '""')}"\n`;
 
