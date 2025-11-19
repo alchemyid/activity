@@ -88,7 +88,7 @@ function createWindow() {
     const timesheetsDir = path.join(app.getPath('home'), 'timesheets');
     const csvFilePath = path.join(timesheetsDir, filename);
 
-    const header = 'Date,Nama,Project,Task,Sub Task,Location,Quantity,Activity\n';
+    const header = 'Date,Employee,Project,Task,Sub Task,Location,Quantity,Activity\n';
     
     const [nama, project, task, location, activity] = data;
     const date = today.toLocaleDateString('en-US'); 
