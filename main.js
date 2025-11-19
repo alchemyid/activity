@@ -64,11 +64,7 @@ function createWindow() {
   }
 
   function formatQuantity(minutes) {
-    if (minutes < 60) {
-      return (60 / minutes).toString();
-    } else {
-      return (minutes / 60).toString();
-    }
+    return (minutes / 60).toString();
   }
 
   function getIndonesianMonthName(date) {
